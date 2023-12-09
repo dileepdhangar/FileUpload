@@ -1,4 +1,6 @@
 const { default: mongoose } = require("mongoose");
+const nodemailer = require("nodemailer");
+const { configNodeMailer } = require("../config/nodemailer");
 
 
 const fileSchema = new mongoose.Schema({
@@ -15,6 +17,10 @@ const fileSchema = new mongoose.Schema({
     email : {
         type: String, 
     },
+})
+
+fileSchema.post("save" , async (doc)=>{
+    configNodeMailer(doc)
 })
 
 
